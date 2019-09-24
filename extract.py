@@ -10,6 +10,7 @@ if len(sys.argv) != 2 or "-h" in sys.argv[1]:
 	sys.exit("Usage: " + sys.argv[0] + " example.mp4")
 else: vidcap = cv2.VideoCapture(sys.argv[1])
 
+print("Remember: You can tune sensitivity/speed parameters in the .py head")
 THRESHOLD = 50 # Higher = More sentitive
 EVERY_SECONDS = 2
 IN_LAST_SECONDS = 4 # How many seconds to compare with
@@ -35,7 +36,7 @@ _, lastIm = vidcap.read() # Read the first frame
 while success: # While we've still got frames
 	success, image = vidcap.read()
 	if count % (EVERY_SECONDS * fps) == 0: # Only check for a new slide every X seconds
-		print('Processing [%d%%]\r'%round(count/length*100), end="") # Print progress
+		print('Processing: [%d%%]\r'%round(count/length*100), end="") # Print progress
 		# If the pixel difference between this and the last frame surpasses our threshold and recency rules
 		if abs(s(image - lastIm)) > threshold and sum(triggers[-IN_LAST_SECONDS:]) < NUM_LAST_SECONDS:
 			cv2.imwrite('frames/frame%07d.jpg'%count,image) # Save the frame
