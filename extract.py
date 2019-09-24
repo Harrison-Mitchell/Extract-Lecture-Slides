@@ -4,6 +4,11 @@ from os import listdir, remove, mkdir
 from shutil import rmtree
 from numpy import mean
 from numpy import sum as s
+import sys
+
+if len(sys.argv) != 2 or "-h" in sys.argv[1]:
+	sys.exit("Usage: " + sys.argv[0] + " example.mp4")
+else: vidcap = cv2.VideoCapture(sys.argv[1])
 
 THRESHOLD = 50 # Higher = More sentitive
 EVERY_SECONDS = 2
@@ -17,7 +22,6 @@ try: remove("slides.pdf")
 except: pass
 mkdir("frames")
 
-vidcap = cv2.VideoCapture(input("File: "))
 count = 0
 triggers = []
 success = True
@@ -26,7 +30,7 @@ width = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 length = int(vidcap.get(cv2.CAP_PROP_FRAME_COUNT))
 threshold = THRESHOLD * (width * height) # Changes compared to size of video frame
-__, lastIm = vidcap.read() # Read the first frame
+_, lastIm = vidcap.read() # Read the first frame
 
 while success: # While we've still got frames
 	success, image = vidcap.read()
