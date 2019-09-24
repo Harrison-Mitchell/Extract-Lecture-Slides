@@ -8,4 +8,4 @@ From a video lecture, create a PDF of the lecture slides.
 * Numpy (`pip install numpy`)
 
 ### Usage
-Run `extract.py` with your video in the directory, follow the prompts. Script has options to change sensitivity and how often the script checks for a new slide (runs faster)
+`python3 extract.py -h` or `python3 extract.py input.mp4` Script has options to change sensitivity and how often the script checks for a new slide (runs faster), change the parameters in the file's head.
